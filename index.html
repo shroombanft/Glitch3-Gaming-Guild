@@ -129,7 +129,7 @@
 <body>
 
     <!-- Centered Logo & Text -->
-    <img src="logo.png" alt="Glitch3 Gaming Guild Logo" class="logo">
+    <img src="new-logo.png" alt="Glitch3 Gaming Guild Logo" class="logo">
     <p class="coming-soon">Coming Soon</p>
     <p class="powered-by">Powered by Ronin</p>
 
@@ -161,7 +161,7 @@
         </div>
     </div>
 
-    <!-- Fetch Live Prices & Market Activity -->
+    <!-- JavaScript for Live Prices & Axie Sales -->
     <script>
         async function fetchCryptoPrices() {
             try {
@@ -183,11 +183,37 @@
 
         async function fetchMarketActivity() {
             try {
-                const response = await fetch("https://marketplace-api.axieinfinity.com/v2/land-sales"); // Replace with actual API
-                const data = await response.json();
+                const response = await fetch("https://graphql-gateway.axieinfinity.com/graphql", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        query: `
+                            {
+                                axieMarketplace {
+                                    results(from: 0, size: 5, sort: "latest", owner: null) {
+                                        id
+                                        name
+                                        class
+                                        image
+                                        price
+                                    }
+                                }
+                            }
+                        `
+                    })
+                });
 
-                const sales = data.slice(0, 5).map(sale => `Land Plot Sold: ${sale.price} WETH`).join("<br>");
-                document.getElementById("market-ticker").innerHTML = sales;
+                const data = await response.json();
+                const axieSales = data.data.axieMarketplace.results;
+
+                document.getElementById("market-ticker").innerHTML = axieSales.map(axie => `
+                    <div>
+                        <img src="${axie.image}" width="50" height="50" alt="Axie">
+                        <strong>${axie.name || "Axie #" + axie.id}</strong> - ${axie.class} 
+                        <br> Sold for ${axie.price / 1000000000000000000} WETH
+                    </div>
+                `).join("");
+
             } catch (error) {
                 console.error("Error fetching market data:", error);
                 document.getElementById("market-ticker").innerHTML = "Failed to load market data.";
