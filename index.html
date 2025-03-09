@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Glitch3 Gaming Guild x Ronin</title>
+    <title>Glitch3 Gaming Guild</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <style>
         /* Import Pixel Font */
@@ -30,40 +30,34 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background: #1e1e1e;
-            color: #fff;
+            background: #1a1a1a;
+            color: #FFD700;
             padding: 10px 15px;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 0.9rem;
             font-weight: bold;
             border: 2px solid #FFD700;
-            cursor: not-allowed; /* Disabled for now */
+            cursor: not-allowed; /* Placeholder behavior */
+            transition: all 0.3s ease-in-out;
+        }
+
+        .connect-wallet:hover {
+            background: #FFD700;
+            color: #1a1a1a;
         }
 
         /* Logo Section */
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .logo-container img {
-            width: 200px; /* Ensures both logos are the same size */
+        .logo {
+            width: 220px;
             height: auto;
-        }
-
-        .collab-x {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #777;
+            margin-bottom: 20px;
         }
 
         /* Coming Soon Text - Pixel Font */
         .coming-soon {
             font-size: 2rem;
             font-weight: bold;
-            margin-top: 25px;
-            color: #FFD700; /* Vibrant Gold */
+            color: #FFD700; /* Gold */
             text-transform: uppercase;
             font-family: 'Press Start 2P', cursive;
         }
@@ -76,11 +70,8 @@
                 font-size: 0.8rem;
                 padding: 8px 12px;
             }
-            .logo-container img {
-                width: 150px;
-            }
-            .collab-x {
-                font-size: 1.5rem;
+            .logo {
+                width: 180px;
             }
             .coming-soon {
                 font-size: 1.5rem;
@@ -93,12 +84,8 @@
     <!-- Connect Wallet Button -->
     <button class="connect-wallet">Connect Wallet</button>
 
-    <!-- Logo Collab Section -->
-    <div class="logo-container">
-        <img src="logo.png" alt="Glitch3 Gaming Guild Logo" onerror="this.src='https://via.placeholder.com/200?text=Logo+Missing'">
-        <span class="collab-x">X</span>
-        <img src="ronin-ron-logo.png" alt="Ronin Logo" onerror="this.src='https://via.placeholder.com/200?text=Ronin+Missing'">
-    </div>
+    <!-- Centered Logo -->
+    <img src="logo.png" alt="Glitch3 Gaming Guild Logo" class="logo" onerror="this.src='https://via.placeholder.com/220?text=Logo+Missing'">
 
     <!-- Coming Soon Text -->
     <p class="coming-soon">Coming Soon...</p>
