@@ -6,22 +6,28 @@
     <title>Glitch3 Gaming Guild</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
 
-        /* General Page Styling - Neo Gaming Theme */
+        /* General Page Styling */
         body {
             background-color: #0d0d0d;
             color: #00ffea;
             font-family: 'Orbitron', sans-serif;
             text-align: center;
-            padding: 5%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+            overflow: hidden;
         }
 
         /* Logo */
         .logo {
-            width: 200px;
+            width: 180px;
             height: auto;
-            margin: 40px 0;
+            margin-bottom: 20px;
         }
 
         /* Coming Soon Text */
@@ -30,47 +36,50 @@
             font-weight: bold;
             color: #ffcc00;
             text-transform: uppercase;
-            text-shadow: 4px 4px 0px black, 6px 6px 5px rgba(255, 215, 0, 0.5);
+            text-shadow: 3px 3px 10px rgba(255, 204, 0, 0.8);
+            margin: 10px 0;
         }
 
         /* Powered by Ronin */
         .powered-by {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: cyan;
             font-weight: bold;
-            margin-top: 10px;
+            margin-bottom: 20px;
         }
 
-        /* Vertical Ticker Styling */
-        .ticker-container, .market-activity {
+        /* Ticker Section */
+        .ticker-wrapper {
             position: absolute;
-            top: 10%;
-            width: 250px;
-            height: 300px;
-            overflow: hidden;
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: bold;
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
         }
 
         .ticker-container {
-            left: 10px;
+            width: 45%;
+            max-width: 400px;
+            height: 150px;
+            overflow: hidden;
             background: rgba(0, 255, 234, 0.1);
             border: 2px solid cyan;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: left;
         }
 
         .market-activity {
-            right: 10px;
+            border-color: magenta;
             background: rgba(255, 0, 128, 0.1);
-            border: 2px solid magenta;
         }
 
         .ticker, .market-ticker {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            white-space: nowrap;
+            gap: 10px;
             animation: scrollVertical 12s linear infinite;
         }
 
@@ -80,6 +89,10 @@
         }
 
         /* Social Media */
+        .social-links {
+            margin-top: 20px;
+        }
+
         .social-links a {
             color: white;
             text-decoration: none;
@@ -94,25 +107,26 @@
             width: 30px;
             height: 30px;
         }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .coming-soon {
+                font-size: 3rem;
+            }
+
+            .ticker-wrapper {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .ticker-container {
+                width: 80%;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <!-- Vertical Crypto Ticker -->
-    <div class="ticker-container">
-        <h3>Crypto Prices</h3>
-        <div class="ticker" id="crypto-ticker">
-            Loading crypto prices...
-        </div>
-    </div>
-
-    <!-- Market Activity Ticker -->
-    <div class="market-activity">
-        <h3>Market Sales</h3>
-        <div class="market-ticker" id="market-ticker">
-            Loading sales data...
-        </div>
-    </div>
 
     <!-- Centered Logo & Text -->
     <img src="logo.png" alt="Glitch3 Gaming Guild Logo" class="logo">
@@ -121,14 +135,30 @@
 
     <!-- Social Links -->
     <div class="social-links">
-        <a href="https://twitter.com/glitch3squad" target="_blank">
+        <a href="https://twitter.com/YOUR_X_USERNAME" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" alt="X Logo">
             Follow us on X
         </a>
-        <a href="https://discord.com/invite/cGjV6b67Vj" target="_blank">
+        <a href="https://discord.gg/YOUR_DISCORD_INVITE" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Discord.png" alt="Discord Logo">
             Join our Discord
         </a>
+    </div>
+
+    <!-- Crypto & Market Activity Ticker -->
+    <div class="ticker-wrapper">
+        <div class="ticker-container">
+            <h3>Crypto Prices</h3>
+            <div class="ticker" id="crypto-ticker">
+                Loading prices...
+            </div>
+        </div>
+        <div class="ticker-container market-activity">
+            <h3>Market Sales</h3>
+            <div class="market-ticker" id="market-ticker">
+                Loading sales data...
+            </div>
+        </div>
     </div>
 
     <!-- Fetch Live Prices & Market Activity -->
