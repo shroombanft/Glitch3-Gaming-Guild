@@ -6,12 +6,12 @@
     <title>Glitch3 Gaming Guild</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <style>
-        /* Import Blocky Gold Font */
-        @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@700&display=swap');
+        /* Import Stock Market-Like Digital Font */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 
         /* General Styling */
         body {
-            background-color: #020212; /* Matches logo background */
+            background-color: #020212;
             color: #e0e0e0;
             font-family: Arial, sans-serif;
             text-align: center;
@@ -45,7 +45,7 @@
             background: #0090D0;
         }
 
-        /* Live Ticker Styling */
+        /* Live Crypto Ticker Styling */
         .ticker-container {
             position: absolute;
             top: 50px;
@@ -55,16 +55,16 @@
             font-size: 1.2rem;
             font-weight: bold;
             text-transform: uppercase;
-            font-family: 'Antonio', sans-serif;
-            color: #FFD700;
-            border-bottom: 2px solid #FFD700;
+            font-family: 'Orbitron', sans-serif;
+            color: #FFFFFF;
+            border-bottom: 2px solid #FFFFFF;
             white-space: nowrap;
             overflow: hidden;
         }
 
         .ticker {
             display: inline-block;
-            animation: scrollTicker 15s linear infinite;
+            animation: scrollTicker 30s linear infinite;
         }
 
         @keyframes scrollTicker {
@@ -80,7 +80,7 @@
             margin-bottom: 20px;
         }
 
-        /* Coming Soon Text */
+        /* Coming Soon Text - Animated */
         .coming-soon {
             font-size: 3rem;
             font-weight: bold;
@@ -88,25 +88,40 @@
             text-transform: uppercase;
             font-family: 'Antonio', sans-serif;
             letter-spacing: 2px;
-            text-shadow: 2px 2px 5px rgba(255, 215, 0, 0.5);
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6);
+            animation: glow 1.5s infinite alternate ease-in-out;
         }
 
-        /* X Social Link */
-        .social-link {
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6); transform: scale(1); }
+            100% { text-shadow: 0 0 15px rgba(255, 215, 0, 1), 0 0 30px rgba(255, 215, 0, 1); transform: scale(1.05); }
+        }
+
+        /* Social Links */
+        .social-links {
             position: absolute;
-            bottom: 20px;
+            bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .social-links a {
             font-size: 1rem;
             font-weight: bold;
-        }
-
-        .social-link a {
-            color: #00AEEF;
+            font-family: 'Antonio', sans-serif;
+            text-transform: uppercase;
+            color: #FFFFFF;
             text-decoration: none;
-            transition: color 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.3s ease-in-out;
         }
 
-        .social-link a:hover {
-            color: #0090D0;
+        .social-links a:hover {
+            opacity: 0.7;
         }
 
         /* Mobile Responsiveness */
@@ -119,7 +134,7 @@
             }
             .ticker-container {
                 top: 45px;
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             .logo {
                 width: 180px;
@@ -128,8 +143,8 @@
             .coming-soon {
                 font-size: 2rem;
             }
-            .social-link {
-                font-size: 0.9rem;
+            .social-links a {
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -147,39 +162,46 @@
     <!-- Centered Logo -->
     <img src="logo.PNG" alt="Glitch3 Gaming Guild Logo" class="logo" onerror="this.src='https://via.placeholder.com/220?text=Logo+Missing'">
 
-    <!-- Coming Soon Text -->
+    <!-- Animated Coming Soon Text -->
     <p class="coming-soon">Coming Soon...</p>
 
-    <!-- X Social Link -->
-    <p class="social-link">
-        Follow us on <a href="https://x.com/Glitch3Squad" target="_blank">X.com/Glitch3Squad</a>
-    </p>
+    <!-- Social Links -->
+    <div class="social-links">
+        <a href="https://x.com/Glitch3Squad" target="_blank">
+            FOLLOW US ON X
+        </a>
+        <a href="https://discord.com/invite/cGjV6b67Vj" target="_blank">
+            JOIN US ON DISCORD
+        </a>
+    </div>
 
     <!-- JavaScript for Live Ticker -->
     <script>
         async function fetchCryptoPrices() {
+            const apiUrl = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,solana,cardano,polygon,polkadot,dogecoin,shiba-inu,litecoin,axie-infinity,sandbox,gala,immutable-x,enjincoin,ronin&vs_currencies=usd";
+            
             try {
-                const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ronin,axie-infinity,smooth-love-potion,ethereum,enjincoin,sandbox,gala,immutable-x&vs_currencies=usd");
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error(`API request failed: ${response.status}`);
+
                 const data = await response.json();
 
-                document.getElementById("crypto-ticker").innerHTML = `
-                    BTC: $${data.bitcoin.usd} | 
-                    RON: $${data.ronin.usd} | 
-                    AXS: $${data["axie-infinity"].usd} | 
-                    SLP: $${data["smooth-love-potion"].usd} | 
-                    ETH: $${data.ethereum.usd} | 
-                    ENJ: $${data.enjincoin.usd} | 
-                    SAND: $${data.sandbox.usd} | 
-                    GALA: $${data.gala.usd} | 
-                    IMX: $${data["immutable-x"].usd}
-                `;
+                let prices = Object.entries(data)
+                    .map(([key, value]) => `${key.toUpperCase()}: $${value.usd.toFixed(2)}`)
+                    .join(" | ");
+
+                document.getElementById("crypto-ticker").innerHTML = prices;
             } catch (error) {
-                document.getElementById("crypto-ticker").innerHTML = "Failed to load prices.";
+                console.error("Error fetching CoinGecko API:", error);
+                document.getElementById("crypto-ticker").innerHTML = "⚠️ Prices currently unavailable.";
             }
         }
 
-        fetchCryptoPrices();
-        setInterval(fetchCryptoPrices, 30000);
+        // Fetch prices on page load and refresh every 30 seconds
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchCryptoPrices();
+            setInterval(fetchCryptoPrices, 30000);
+        });
     </script>
 
 </body>
