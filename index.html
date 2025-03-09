@@ -6,7 +6,7 @@
     <title>Glitch3 Gaming Guild</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <style>
-        /* Import Stock Market-Like Digital Font */
+        /* Import Digital Font */
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 
         /* General Styling */
@@ -56,7 +56,7 @@
             font-weight: bold;
             text-transform: uppercase;
             font-family: 'Orbitron', sans-serif;
-            color: #FFD700; /* Gold Font */
+            color: #FFD700;
             border-bottom: 2px solid #FFD700;
             white-space: nowrap;
             overflow: hidden;
@@ -64,7 +64,7 @@
 
         .ticker {
             display: inline-block;
-            animation: scrollTicker 45s linear infinite; /* Slower scrolling */
+            animation: scrollTicker 45s linear infinite;
         }
 
         @keyframes scrollTicker {
@@ -86,7 +86,7 @@
             font-weight: bold;
             color: #FFD700;
             text-transform: uppercase;
-            font-family: 'Antonio', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             letter-spacing: 2px;
             text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6);
             animation: glow 1.5s infinite alternate ease-in-out;
@@ -97,10 +97,30 @@
             100% { text-shadow: 0 0 15px rgba(255, 215, 0, 1), 0 0 30px rgba(255, 215, 0, 1); transform: scale(1.05); }
         }
 
+        /* Music Button */
+        .music-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: #FFD700;
+            color: #000;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .music-button:hover {
+            background: #E6C200;
+        }
+
         /* Social Links */
         .social-links {
             position: absolute;
-            bottom: 30px;
+            bottom: 60px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -110,7 +130,7 @@
         .social-links a {
             font-size: 1rem;
             font-weight: bold;
-            font-family: 'Antonio', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
             color: #FFFFFF;
             text-decoration: none;
@@ -142,6 +162,11 @@
             }
             .coming-soon {
                 font-size: 2rem;
+            }
+            .music-button {
+                bottom: 20px;
+                right: 10px;
+                font-size: 0.9rem;
             }
             .social-links a {
                 font-size: 0.85rem;
@@ -175,7 +200,15 @@
         </a>
     </div>
 
-    <!-- JavaScript for Live Ticker -->
+    <!-- Retro Music -->
+    <audio id="bg-music" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_299a43b28e.mp3?filename=arcade-music-loop-128925.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Music Control Button -->
+    <button id="music-button" class="music-button">🔊 Mute</button>
+
+    <!-- JavaScript for Music Control & Ticker -->
     <script>
         async function fetchCryptoPrices() {
             const apiUrl = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,solana,cardano,polygon,polkadot,dogecoin,shiba-inu,litecoin,axie-infinity,sandbox,gala,immutable-x,enjincoin,ronin&vs_currencies=usd";
@@ -192,14 +225,23 @@
 
                 document.getElementById("crypto-ticker").innerHTML = prices;
             } catch (error) {
-                console.error("Error fetching CoinGecko API:", error);
                 document.getElementById("crypto-ticker").innerHTML = "⚠️ Prices currently unavailable.";
             }
         }
 
-        // Load prices immediately when site loads
         fetchCryptoPrices();
         setInterval(fetchCryptoPrices, 30000);
+
+        const music = document.getElementById("bg-music");
+        document.getElementById("music-button").addEventListener("click", () => {
+            if (music.paused) {
+                music.play();
+                musicButton.textContent = "🔊 Mute";
+            } else {
+                music.pause();
+                musicButton.textContent = "🔈 Unmute";
+            }
+        });
     </script>
 
 </body>
