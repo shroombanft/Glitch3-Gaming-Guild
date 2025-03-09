@@ -25,30 +25,30 @@
             position: relative;
         }
 
-        /* Connect Wallet Button - Small Sky Blue Box */
+        /* Connect Wallet Button */
         .connect-wallet {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: #00AEEF; /* Sky Blue */
-            color: #FFFFFF; /* White Text */
+            background: #00AEEF;
+            color: #FFFFFF;
             padding: 8px 14px;
             border-radius: 6px;
             font-size: 0.85rem;
             font-weight: bold;
             border: none;
-            cursor: not-allowed; /* Placeholder behavior */
+            cursor: not-allowed;
             transition: background 0.3s ease-in-out;
         }
 
         .connect-wallet:hover {
-            background: #0090D0; /* Slightly darker blue */
+            background: #0090D0;
         }
 
         /* Live Ticker Styling */
         .ticker-container {
             position: absolute;
-            top: 50px; /* Moves ticker down to avoid overlap */
+            top: 50px;
             width: 100%;
             background: #020212;
             padding: 10px 0;
@@ -56,7 +56,7 @@
             font-weight: bold;
             text-transform: uppercase;
             font-family: 'Antonio', sans-serif;
-            color: #FFD700; /* Gold */
+            color: #FFD700;
             border-bottom: 2px solid #FFD700;
             white-space: nowrap;
             overflow: hidden;
@@ -76,15 +76,15 @@
         .logo {
             width: 220px;
             height: auto;
-            margin-top: 80px; /* Moves logo down for spacing */
+            margin-top: 80px;
             margin-bottom: 20px;
         }
 
-        /* Coming Soon Text - Blocky Gold Bar Font */
+        /* Coming Soon Text */
         .coming-soon {
             font-size: 3rem;
             font-weight: bold;
-            color: #FFD700; /* Vibrant Gold */
+            color: #FFD700;
             text-transform: uppercase;
             font-family: 'Antonio', sans-serif;
             letter-spacing: 2px;
@@ -100,13 +100,13 @@
         }
 
         .social-link a {
-            color: #00AEEF; /* Sky Blue */
+            color: #00AEEF;
             text-decoration: none;
             transition: color 0.3s ease-in-out;
         }
 
         .social-link a:hover {
-            color: #0090D0; /* Slightly darker blue */
+            color: #0090D0;
         }
 
         /* Mobile Responsiveness */
@@ -118,7 +118,7 @@
                 padding: 6px 12px;
             }
             .ticker-container {
-                top: 45px; /* Adjusted spacing for smaller screens */
+                top: 45px;
                 font-size: 1rem;
             }
             .logo {
@@ -152,14 +152,14 @@
 
     <!-- X Social Link -->
     <p class="social-link">
-        Follow us on X ( Discord in Bio) <a href="https://x.com/Glitch3Squad" target="_blank">X.com/Glitch3Squad</a>
+        Follow us on <a href="https://x.com/Glitch3Squad" target="_blank">X.com/Glitch3Squad</a>
     </p>
 
     <!-- JavaScript for Live Ticker -->
     <script>
         async function fetchCryptoPrices() {
             try {
-                const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ronin,axie-infinity,smooth-love-potion,ethereum,wrapped-ronin&vs_currencies=usd");
+                const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ronin,axie-infinity,smooth-love-potion,ethereum,enjincoin,sandbox,gala,immutable-x&vs_currencies=usd");
                 const data = await response.json();
 
                 document.getElementById("crypto-ticker").innerHTML = `
@@ -168,7 +168,10 @@
                     AXS: $${data["axie-infinity"].usd} | 
                     SLP: $${data["smooth-love-potion"].usd} | 
                     ETH: $${data.ethereum.usd} | 
-                    RONKE/WETH: $${data["wrapped-ronin"].usd}
+                    ENJ: $${data.enjincoin.usd} | 
+                    SAND: $${data.sandbox.usd} | 
+                    GALA: $${data.gala.usd} | 
+                    IMX: $${data["immutable-x"].usd}
                 `;
             } catch (error) {
                 document.getElementById("crypto-ticker").innerHTML = "Failed to load prices.";
@@ -181,3 +184,4 @@
 
 </body>
 </html>
+
