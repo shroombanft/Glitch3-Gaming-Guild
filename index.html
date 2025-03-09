@@ -56,15 +56,15 @@
             font-weight: bold;
             text-transform: uppercase;
             font-family: 'Orbitron', sans-serif;
-            color: #FFFFFF;
-            border-bottom: 2px solid #FFFFFF;
+            color: #FFD700; /* Gold Font */
+            border-bottom: 2px solid #FFD700;
             white-space: nowrap;
             overflow: hidden;
         }
 
         .ticker {
             display: inline-block;
-            animation: scrollTicker 30s linear infinite;
+            animation: scrollTicker 45s linear infinite; /* Slower scrolling */
         }
 
         @keyframes scrollTicker {
@@ -197,11 +197,9 @@
             }
         }
 
-        // Fetch prices on page load and refresh every 30 seconds
-        document.addEventListener("DOMContentLoaded", () => {
-            fetchCryptoPrices();
-            setInterval(fetchCryptoPrices, 30000);
-        });
+        // Load prices immediately when site loads
+        fetchCryptoPrices();
+        setInterval(fetchCryptoPrices, 30000);
     </script>
 
 </body>
