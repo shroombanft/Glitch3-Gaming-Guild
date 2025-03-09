@@ -45,10 +45,38 @@
             background: #0090D0; /* Slightly darker blue */
         }
 
+        /* Live Ticker Styling */
+        .ticker-container {
+            position: absolute;
+            top: 50px; /* Moves ticker down to avoid overlap */
+            width: 100%;
+            background: #020212;
+            padding: 10px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: 'Antonio', sans-serif;
+            color: #FFD700; /* Gold */
+            border-bottom: 2px solid #FFD700;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .ticker {
+            display: inline-block;
+            animation: scrollTicker 15s linear infinite;
+        }
+
+        @keyframes scrollTicker {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+
         /* Logo Section */
         .logo {
             width: 220px;
             height: auto;
+            margin-top: 80px; /* Moves logo down for spacing */
             margin-bottom: 20px;
         }
 
@@ -63,6 +91,24 @@
             text-shadow: 2px 2px 5px rgba(255, 215, 0, 0.5);
         }
 
+        /* X Social Link */
+        .social-link {
+            position: absolute;
+            bottom: 20px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .social-link a {
+            color: #00AEEF; /* Sky Blue */
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .social-link a:hover {
+            color: #0090D0; /* Slightly darker blue */
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .connect-wallet {
@@ -71,11 +117,19 @@
                 font-size: 0.8rem;
                 padding: 6px 12px;
             }
+            .ticker-container {
+                top: 45px; /* Adjusted spacing for smaller screens */
+                font-size: 1rem;
+            }
             .logo {
                 width: 180px;
+                margin-top: 60px;
             }
             .coming-soon {
                 font-size: 2rem;
+            }
+            .social-link {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -85,11 +139,45 @@
     <!-- Connect Wallet Button -->
     <button class="connect-wallet">Connect Wallet</button>
 
+    <!-- Live Crypto Ticker -->
+    <div class="ticker-container">
+        <span id="crypto-ticker" class="ticker">Loading live prices...</span>
+    </div>
+
     <!-- Centered Logo -->
     <img src="logo.PNG" alt="Glitch3 Gaming Guild Logo" class="logo" onerror="this.src='https://via.placeholder.com/220?text=Logo+Missing'">
 
     <!-- Coming Soon Text -->
     <p class="coming-soon">Coming Soon...</p>
+
+    <!-- X Social Link -->
+    <p class="social-link">
+        Follow us on <a href="https://x.com/Glitch3Squad" target="_blank">X.com/Glitch3Squad</a>
+    </p>
+
+    <!-- JavaScript for Live Ticker -->
+    <script>
+        async function fetchCryptoPrices() {
+            try {
+                const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ronin,axie-infinity,smooth-love-potion,ethereum,wrapped-ronin&vs_currencies=usd");
+                const data = await response.json();
+
+                document.getElementById("crypto-ticker").innerHTML = `
+                    BTC: $${data.bitcoin.usd} | 
+                    RON: $${data.ronin.usd} | 
+                    AXS: $${data["axie-infinity"].usd} | 
+                    SLP: $${data["smooth-love-potion"].usd} | 
+                    ETH: $${data.ethereum.usd} | 
+                    RONKE/WETH: $${data["wrapped-ronin"].usd}
+                `;
+            } catch (error) {
+                document.getElementById("crypto-ticker").innerHTML = "Failed to load prices.";
+            }
+        }
+
+        fetchCryptoPrices();
+        setInterval(fetchCryptoPrices, 30000);
+    </script>
 
 </body>
 </html>
