@@ -13,8 +13,8 @@
         body {
             background-color: #020212;
             color: #e0e0e0;
-            font-family: Arial, sans-serif;
             text-align: center;
+            font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -38,17 +38,10 @@
             font-weight: bold;
             border: none;
             cursor: not-allowed;
-            transition: background 0.3s ease-in-out;
-        }
-
-        .connect-wallet:hover {
-            background: #0090D0;
         }
 
         /* Live Crypto Ticker Styling */
         .ticker-container {
-            position: absolute;
-            top: 50px;
             width: 100%;
             background: #020212;
             padding: 10px 0;
@@ -75,9 +68,7 @@
         /* Logo Section */
         .logo {
             width: 220px;
-            height: auto;
-            margin-top: 80px;
-            margin-bottom: 20px;
+            margin: 50px 0 20px;
         }
 
         /* Coming Soon Text - Animated */
@@ -85,92 +76,43 @@
             font-size: 3rem;
             font-weight: bold;
             color: #FFD700;
-            text-transform: uppercase;
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 2px;
-            text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6);
-            animation: glow 1.5s infinite alternate ease-in-out;
-        }
-
-        @keyframes glow {
-            0% { text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6); transform: scale(1); }
-            100% { text-shadow: 0 0 15px rgba(255, 215, 0, 1), 0 0 30px rgba(255, 215, 0, 1); transform: scale(1.05); }
-        }
-
-        /* Music Button */
-        .music-button {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            background: #FFD700;
-            color: #000;
-            padding: 10px 16px;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s ease-in-out;
-        }
-
-        .music-button:hover {
-            background: #E6C200;
         }
 
         /* Social Links */
         .social-links {
-            position: absolute;
-            bottom: 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
+            margin-top: 20px;
         }
 
         .social-links a {
-            font-size: 1rem;
-            font-weight: bold;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
+            margin: 10px;
             color: #FFFFFF;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: opacity 0.3s ease-in-out;
+            font-size: 1.2rem;
+            font-weight: bold;
         }
 
-        .social-links a:hover {
-            opacity: 0.7;
+        /* Music Button (Smaller, Transparent & Positioned at Bottom) */
+        .music-container {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
         }
 
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .connect-wallet {
-                top: 10px;
-                right: 10px;
-                font-size: 0.8rem;
-                padding: 6px 12px;
-            }
-            .ticker-container {
-                top: 45px;
-                font-size: 1.1rem;
-            }
-            .logo {
-                width: 180px;
-                margin-top: 60px;
-            }
-            .coming-soon {
-                font-size: 2rem;
-            }
-            .music-button {
-                bottom: 20px;
-                right: 10px;
-                font-size: 0.9rem;
-            }
-            .social-links a {
-                font-size: 0.85rem;
-            }
+        .music-button {
+            background: transparent;
+            color: #FFD700;
+            padding: 5px 12px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border: 1px solid #FFD700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .music-button:hover {
+            background: rgba(255, 215, 0, 0.2);
         }
     </style>
 </head>
@@ -185,28 +127,26 @@
     </div>
 
     <!-- Centered Logo -->
-    <img src="logo.PNG" alt="Glitch3 Gaming Guild Logo" class="logo" onerror="this.src='https://via.placeholder.com/220?text=Logo+Missing'">
+    <img src="logo.PNG" alt="Glitch3 Gaming Guild Logo" class="logo">
 
     <!-- Animated Coming Soon Text -->
     <p class="coming-soon">Coming Soon...</p>
 
     <!-- Social Links -->
     <div class="social-links">
-        <a href="https://x.com/Glitch3Squad" target="_blank">
-            FOLLOW US ON X
-        </a>
-        <a href="https://discord.com/invite/cGjV6b67Vj" target="_blank">
-            JOIN US ON DISCORD
-        </a>
+        <a href="https://x.com/Glitch3Squad" target="_blank">FOLLOW US ON X</a>
+        <a href="https://discord.com/invite/cGjV6b67Vj" target="_blank">JOIN US ON DISCORD</a>
+    </div>
+
+    <!-- Music Control Button (Now Transparent & Smaller) -->
+    <div class="music-container">
+        <button id="music-button" class="music-button">🔈 Play Music</button>
     </div>
 
     <!-- Retro Music -->
     <audio id="bg-music" loop>
         <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_299a43b28e.mp3?filename=arcade-music-loop-128925.mp3" type="audio/mp3">
     </audio>
-
-    <!-- Music Control Button -->
-    <button id="music-button" class="music-button">🔊 Mute</button>
 
     <!-- JavaScript for Music Control & Ticker -->
     <script>
@@ -233,16 +173,19 @@
         setInterval(fetchCryptoPrices, 30000);
 
         const music = document.getElementById("bg-music");
-        document.getElementById("music-button").addEventListener("click", () => {
+        const musicButton = document.getElementById("music-button");
+
+        musicButton.addEventListener("click", () => {
             if (music.paused) {
                 music.play();
                 musicButton.textContent = "🔊 Mute";
             } else {
                 music.pause();
-                musicButton.textContent = "🔈 Unmute";
+                musicButton.textContent = "🔈 Play Music";
             }
         });
     </script>
 
 </body>
 </html>
+
