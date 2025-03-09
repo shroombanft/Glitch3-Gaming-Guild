@@ -25,25 +25,24 @@
             position: relative;
         }
 
-        /* Connect Wallet Button */
+        /* Connect Wallet Button - Small Box */
         .connect-wallet {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #1a1a1a;
-            color: #FFD700;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-size: 0.9rem;
+            top: 15px;
+            right: 15px;
+            background: #00AEEF; /* Sky Blue */
+            color: #FFFFFF; /* White Text */
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
             font-weight: bold;
-            border: 2px solid #FFD700;
+            border: none;
             cursor: not-allowed; /* Placeholder behavior */
-            transition: all 0.3s ease-in-out;
+            transition: background 0.3s ease-in-out;
         }
 
         .connect-wallet:hover {
-            background: #FFD700;
-            color: #1a1a1a;
+            background: #0090D0; /* Slightly darker blue */
         }
 
         /* Logo Section */
@@ -68,7 +67,7 @@
                 top: 10px;
                 right: 10px;
                 font-size: 0.8rem;
-                padding: 8px 12px;
+                padding: 6px 12px;
             }
             .logo {
                 width: 180px;
@@ -85,7 +84,7 @@
     <button class="connect-wallet">Connect Wallet</button>
 
     <!-- Centered Logo -->
-    <img src="logo.png" alt="Glitch3 Gaming Guild Logo" class="logo" onerror="this.src='https://via.placeholder.com/220?text=Logo+Missing'">
+    <img src="logo.PNG" alt="Glitch3 Gaming Guild Logo" class="logo" onerror="this.src='https://via.placeholder.com/220?text=Logo+Missing'">
 
     <!-- Coming Soon Text -->
     <p class="coming-soon">Coming Soon...</p>
