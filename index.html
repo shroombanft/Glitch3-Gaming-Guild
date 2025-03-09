@@ -5,25 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Glitch3 Gaming Guild - Coming Soon</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
         body {
             background-color: black;
             color: white;
             text-align: center;
-            font-family: Arial, sans-serif;
-            padding: 20%;
+            font-family: 'Arial', sans-serif;
+            padding: 10%;
         }
+        
         h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             color: cyan;
+            text-transform: uppercase;
+            text-shadow: 0px 0px 10px cyan;
         }
-        p {
+
+        .coming-soon {
+            font-size: 6rem;
+            color: gold;
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: 4px 4px 0px black, 6px 6px 5px rgba(255, 215, 0, 0.5);
+        }
+
+        .powered-by {
             font-size: 1.5rem;
             color: magenta;
+            margin-top: 20px;
+        }
+
+        .x-link {
+            margin-top: 30px;
+            font-size: 1.5rem;
+        }
+
+        .x-link a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .x-link img {
+            width: 30px;
+            height: 30px;
         }
     </style>
 </head>
 <body>
     <h1>Glitch3 Gaming Guild</h1>
-    <p>Under Construction - Coming Soon</p>
+    <p class="coming-soon">Coming Soon</p>
+    <p class="powered-by">Powered by Ronin and Web3</p>
+
+    <div class="x-link">
+        <a href="https://twitter.com/Glitch3squad" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" alt="X Logo">
+            Follow us on X
+        </a>
+    </div>
 </body>
 </html>
