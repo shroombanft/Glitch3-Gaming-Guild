@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Glitch3 Gaming Guild - Coming Soon</title>
+    <title>Glitch3 Gaming Guild</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
@@ -12,42 +13,64 @@
             color: white;
             text-align: center;
             font-family: 'Arial', sans-serif;
-            padding: 5%;
         }
 
-        /* Banner Styling */
+        /* Crypto Ticker */
+        .ticker-container {
+            width: 100%;
+            overflow: hidden;
+            background: #111;
+            padding: 10px 0;
+        }
+
+        .ticker {
+            display: flex;
+            gap: 30px;
+            white-space: nowrap;
+            animation: scroll 15s linear infinite;
+            color: gold;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        @keyframes scroll {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+
+        /* Banner */
         .banner {
             width: 100%;
-            max-height: 300px;
+            max-height: 400px;
             object-fit: cover;
-            border-bottom: 3px solid cyan;
         }
 
-        /* Logo Styling */
+        /* Logo */
         .logo {
             width: 150px;
             height: auto;
-            margin-top: 20px;
+            margin: 20px 0;
         }
 
+        /* Headings */
         h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             color: cyan;
             text-transform: uppercase;
             text-shadow: 0px 0px 10px cyan;
         }
 
         .coming-soon {
-            font-size: 6rem;
+            font-size: 5rem;
             color: gold;
             font-family: 'Press Start 2P', cursive;
             text-shadow: 4px 4px 0px black, 6px 6px 5px rgba(255, 215, 0, 0.5);
         }
 
+        /* Powered by Ronin */
         .powered-by {
             font-size: 1.5rem;
             color: magenta;
-            margin-top: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -64,48 +87,114 @@
             color: gold;
         }
 
-        .x-link {
-            margin-top: 30px;
-            font-size: 1.5rem;
-        }
-
-        .x-link a {
+        /* Social Media */
+        .social-links a {
             color: white;
             text-decoration: none;
             font-weight: bold;
+            margin: 10px;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .x-link img {
+        .social-links img {
             width: 30px;
             height: 30px;
+        }
+
+        /* Email Signup */
+        .email-signup input, .email-signup button {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px auto;
         }
     </style>
 </head>
 <body>
-    <!-- Banner Image -->
+
+    <!-- Crypto Ticker -->
+    <div class="ticker-container">
+        <div class="ticker" id="crypto-ticker">
+            Loading crypto prices...
+        </div>
+    </div>
+
+    <!-- Banner -->
     <img src="banner.png" alt="Glitch3 Gaming Guild Banner" class="banner">
 
-    <!-- Logo Image -->
+    <!-- Logo -->
     <img src="logo.png" alt="Glitch3 Gaming Guild Logo" class="logo">
 
-    <h1>Glitch3 Gaming Guild</h1>
-    <p class="coming-soon">Coming Soon</p>
+    <!-- Main Content -->
+    <main class="container">
+        <h1>Glitch3 Gaming Guild</h1>
+        <p class="coming-soon">Coming Soon</p>
 
-    <!-- Powered by Ronin and Web3 with Ronin Logo -->
-    <p class="powered-by">
-        Powered by <span class="ronin">Ronin</span> 
-        <img src="ronin.png" alt="Ronin Logo">
-        and Web3
-    </p>
+        <p>We are building the next-gen gaming community powered by Web3 and Ronin.</p>
 
-    <div class="x-link">
-        <a href="https://twitter.com/YOUR_X_USERNAME" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" alt="X Logo">
-            Follow us on X
-        </a>
-    </div>
+        <!-- Powered by Ronin -->
+        <p class="powered-by">
+            Powered by <span class="ronin">Ronin</span> 
+            <img src="ronin.png" alt="Ronin Logo">
+            and Web3
+        </p>
+
+        <!-- Social Links -->
+        <div class="social-links">
+            <a href="https://twitter.com/glitch3squad" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" alt="X Logo">
+                Follow us on X
+            </a>
+            <a href="https://discord.com/invite/cGjV6b67Vj" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Discord.png" alt="Discord Logo">
+                Join our Discord
+            </a>
+        </div>
+
+        <!-- Email Signup -->
+        <section class="email-signup">
+            <h2>Stay Updated</h2>
+            <form>
+                <input type="email" placeholder="Axuelsg@gmail.com" required>
+                <button type="submit">Notify Me</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="container">
+        <small>© 2024 Glitch3 Gaming Guild. All rights reserved.</small>
+    </footer>
+
+    <!-- Crypto Price Fetching Script -->
+    <script>
+        async function fetchCryptoPrices() {
+            try {
+                const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ronin,axie-infinity,smooth-love-potion,ethereum&vs_currencies=usd");
+                const data = await response.json();
+
+                const ronPrice = data.ronin.usd;
+                const axsPrice = data["axie-infinity"].usd;
+                const slpPrice = data["smooth-love-potion"].usd;
+                const ethPrice = data.ethereum.usd;
+
+                document.getElementById("crypto-ticker").innerHTML = `
+                    RON: $${ronPrice} | 
+                    AXS: $${axsPrice} | 
+                    SLP: $${slpPrice} | 
+                    ETH: $${ethPrice}
+                `;
+            } catch (error) {
+                console.error("Error fetching crypto prices:", error);
+                document.getElementById("crypto-ticker").innerHTML = "Failed to load prices.";
+            }
+        }
+
+        // Fetch prices on load and every 30 seconds
+        fetchCryptoPrices();
+        setInterval(fetchCryptoPrices, 30000);
+    </script>
+
 </body>
 </html>
