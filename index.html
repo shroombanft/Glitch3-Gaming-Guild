@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Glitch3 Gaming Guild</title>
+    <title>Glitch3 Gaming Guild x Ronin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-
-        /* General Styling - Clean & Minimalist */
+        /* General Styling */
         body {
             background-color: #121212;
             color: #e0e0e0;
-            font-family: 'Inter', sans-serif;
+            font-family: Arial, sans-serif;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -21,116 +19,59 @@
             height: 100vh;
             padding: 20px;
             margin: 0;
-            overflow: hidden;
         }
 
-        /* Crypto Ticker at the Top */
-        .ticker-container {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            background: #1c1c1c;
-            padding: 12px 0;
-            font-size: 1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-bottom: 2px solid #222;
-        }
-
-        /* Centered Logo */
-        .logo {
-            width: 220px;
-            height: auto;
-            margin-bottom: 25px;
-            opacity: 0.95;
-        }
-
-        /* Social Media */
-        .social-links {
-            position: absolute;
-            bottom: 20px;
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-links a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-weight: bold;
+        /* Logo Section */
+        .logo-container {
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: color 0.3s ease-in-out;
+            gap: 20px;
         }
 
-        .social-links a:hover {
-            color: white;
+        .logo-container img {
+            width: 180px;
+            height: auto;
         }
 
-        .social-links img {
-            width: 24px;
-            height: 24px;
+        .collab-x {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #999;
         }
 
-        /* Mobile Adjustments */
+        /* Coming Soon Text */
+        .coming-soon {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #bbb;
+        }
+
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            .logo {
-                width: 180px;
+            .logo-container img {
+                width: 140px;
             }
-            .ticker-container {
-                font-size: 0.9rem;
+            .collab-x {
+                font-size: 1.5rem;
             }
-            .social-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
+            .coming-soon {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Crypto Ticker -->
-    <div class="ticker-container" id="crypto-ticker">
-        Loading crypto prices...
+    <!-- Logo Collab Section -->
+    <div class="logo-container">
+        <img src="new-logo.png" alt="Glitch3 Gaming Guild Logo" onerror="this.src='https://via.placeholder.com/180?text=Logo+Missing'">
+        <span class="collab-x">X</span>
+        <img src="ronin-ron-logo.png" alt="Ronin Logo" onerror="this.src='https://via.placeholder.com/180?text=Ronin+Missing'">
     </div>
 
-    <!-- Centered Logo -->
-    <img src="logo.png" alt="Glitch3 Gaming Guild Logo" class="logo" onerror="this.src='https://via.placeholder.com/220?text=Logo+Missing'">
-
-    <!-- Social Links -->
-    <div class="social-links">
-        <a href="https://twitter.com/YOUR_X_USERNAME" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" alt="X Logo">
-            Follow us on X
-        </a>
-        <a href="https://discord.gg/YOUR_DISCORD_INVITE" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Discord.png" alt="Discord Logo">
-            Join our Discord
-        </a>
-    </div>
-
-    <!-- JavaScript for Crypto Price Ticker -->
-    <script>
-        async function fetchCryptoPrices() {
-            try {
-                const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ronin,axie-infinity,smooth-love-potion,ethereum&vs_currencies=usd");
-                const data = await response.json();
-
-                document.getElementById("crypto-ticker").innerHTML = `
-                    RON: $${data.ronin.usd} | 
-                    AXS: $${data["axie-infinity"].usd} | 
-                    SLP: $${data["smooth-love-potion"].usd} | 
-                    ETH: $${data.ethereum.usd}
-                `;
-            } catch (error) {
-                document.getElementById("crypto-ticker").innerHTML = "Failed to load prices.";
-            }
-        }
-
-        fetchCryptoPrices();
-        setInterval(fetchCryptoPrices, 30000);
-    </script>
+    <!-- Coming Soon Text -->
+    <p class="coming-soon">Coming Soon...</p>
 
 </body>
 </html>
