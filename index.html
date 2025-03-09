@@ -65,17 +65,36 @@
             to { transform: translateX(-100%); }
         }
 
-        /* Logo Section */
-        .logo {
-            width: 220px;
-            margin: 50px 0 20px;
+        /* Animated Logo Section */
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
         }
 
-        /* Coming Soon Text - Animated */
+        .logo {
+            width: 220px;
+            height: auto;
+            animation: fadeIn 2s ease-in-out infinite alternate;
+        }
+
+        /* Animated Coming Soon */
         .coming-soon {
             font-size: 3rem;
             font-weight: bold;
             color: #FFD700;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6);
+            animation: pulse 1.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0.5; transform: scale(1.05); }
         }
 
         /* Social Links */
@@ -91,7 +110,7 @@
             font-weight: bold;
         }
 
-        /* Music Button (Smaller, Transparent & Positioned at Bottom) */
+        /* Music Button (Small & Transparent) */
         .music-container {
             position: absolute;
             bottom: 10px;
@@ -126,11 +145,11 @@
         <span id="crypto-ticker" class="ticker">Loading live prices...</span>
     </div>
 
-    <!-- Centered Logo -->
-    <img src="logo.PNG" alt="Glitch3 Gaming Guild Logo" class="logo">
-
-    <!-- Animated Coming Soon Text -->
-    <p class="coming-soon">Coming Soon...</p>
+    <!-- Animated Logo & Coming Soon -->
+    <div class="logo-container">
+        <img src="logo.PNG" alt="Glitch3 Gaming Guild Logo" class="logo">
+        <p class="coming-soon">Coming Soon...</p>
+    </div>
 
     <!-- Social Links -->
     <div class="social-links">
@@ -138,7 +157,7 @@
         <a href="https://discord.com/invite/cGjV6b67Vj" target="_blank">JOIN US ON DISCORD</a>
     </div>
 
-    <!-- Music Control Button (Now Transparent & Smaller) -->
+    <!-- Music Control Button (At Bottom) -->
     <div class="music-container">
         <button id="music-button" class="music-button">🔈 Play Music</button>
     </div>
@@ -188,4 +207,3 @@
 
 </body>
 </html>
-
